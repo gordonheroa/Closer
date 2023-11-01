@@ -32,11 +32,31 @@ chrome.action.onClicked.addListener(() => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         url1 = (' ' + tabs[0].url).slice(1);
         chrome.notifications.create('', {
-            title: url1.slice(0,30),
+            title: url1,
             message: 'Tab has been locked',
             iconUrl: '/Images/chrome.png',
             type: 'basic'
         });
+	chrome.windows.update(tabs[0].windowId,{state:"fullscreen"});
         listeners(url1);
-    });
+	let active = true;
+	chrome.windows.onBoundsChanged.addListener(() => {
+	    if (!active) { return; }
+	    active = false;
+	    sleep(250).then(() => {
+		chrome.windows.update(tabs[0].windowId,{state:"fullscreen",focused:true});
+		active = true;
+	    });
+	    
+	});
+	chrome.windows.onFocusChanged.addListener(() => {
+	    if (!active) { return; }
+	    active = false;
+	    sleep(250).then(() => {
+		chrome.windows.update(tabs[0].windowId,{state:"fullscreen",focused:true});
+		active = true;
+	    });
+	    
+	});
+    }); 
 });
