@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Closer",
+  "description": "Closes all tabs except the one it initially was activated on",
+  "version": "1.0",
+  "action": {
+    "default_title": "Click to show an alert"
+  },
+  "permissions": ["tabs","notifications","storage"],
+  "background": {"service_worker": "background.js"}
+}
