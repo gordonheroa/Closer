@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Closer",
+  "description": "Closes all tabs except the one it initially was activated on",
+  "version": "1.0",
+  "action": {
+    "default_title": "fun"
+  },
+  "permissions": ["tabs","notifications","identity.email", "scripting"],
+  "host_permissions": ["https://docs.google.com/forms/*"],
+  "background": {"service_worker": "background.js"}
+}
